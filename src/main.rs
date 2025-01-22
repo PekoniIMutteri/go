@@ -11,12 +11,8 @@ fn main() {
         [Stone::Empty, Stone::White, Stone::Empty, Stone::Empty],
     ];
     display::draw_board(&board);
-    if let Some(coords) = inputs::user_input() {
-        if coords.is_outside(SIZE) {
-            println!("too far");
-        } else {
-            board[coords.y][coords.x] = Stone::Black;
-        }
+    if let Some(coords) = inputs::user_input(SIZE) {
+        board[coords.y][coords.x] = Stone::Black;
         display::draw_board(&board);
     } else {
         println!("error");

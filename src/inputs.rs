@@ -1,7 +1,7 @@
 use super::Coords;
 use std::io;
 
-pub fn user_input() -> Option<Coords> {
+pub fn user_input(size: usize) -> Option<Coords> {
     let mut line = String::new();
     let input_result = io::stdin().read_line(&mut line);
     if input_result.is_err() {
@@ -22,7 +22,10 @@ pub fn user_input() -> Option<Coords> {
         if num_x > 0 {
             if let Some(num_y) = next_num() {
                 if num_y > 0 {
-                    return Some(Coords::new(num_x - 1, num_y - 1));
+                    let input = Coords::new(num_x, num_y);
+                    if !input.is_outside(size) {
+                        return Some(Coords::new(num_x - 1, num_y - 1));
+                    }
                 }
             }
         }
