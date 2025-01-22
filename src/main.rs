@@ -3,13 +3,35 @@
 //const SIZE: usize = 5;
 
 mod display;
+mod inputs;
 
 fn main() {
     let board = [
-        [Stone::Black, Stone::Empty],
-        [Stone::Empty, Stone::White],
+        [Stone::Black, Stone::Empty, Stone::Black, Stone::Black],
+        [Stone::Empty, Stone::White, Stone::White, Stone::White],
+        [Stone::Empty, Stone::Empty, Stone::White, Stone::Empty],
+        [Stone::Empty, Stone::White, Stone::Empty, Stone::Empty],
     ];
     display::draw_board(&board);
+    if let Some(coords) = inputs::user_input() {
+        println!("{} {}", coords.x, coords.y);
+    } else {
+        println!("error");
+    }
+}
+
+struct Coords {
+    x: usize,
+    y: usize,
+}
+
+impl Coords {
+    fn new(x: usize, y: usize) -> Self {
+        Coords {
+            x,
+            y,
+        }
+    }
 }
 
 #[derive(Clone, Copy)]
@@ -22,11 +44,6 @@ enum Stone {
 
 
 /* 
-
-fn main() {
-    let mut board = [[Stone::Empty; SIZE]; SIZE];
-    play(&mut board);
-}
 
 fn play<const N: usize>(board: &mut [[Stone; N]; N]) {
     let mut stone = Stone::Black;
@@ -47,28 +64,6 @@ fn play<const N: usize>(board: &mut [[Stone; N]; N]) {
     }
     draw_board(board);
     println!("\nquit");
-}
-
-fn inputs() -> [usize; 2] {
-    let mut line = String::new();
-    io::stdin().read_line(&mut line).expect("error reading");
-    let mut substr_iter = line.trim().split_whitespace();
-    let mut next_num = || ->  usize {
-        let next = substr_iter.next();
-        if let Some(string) = next {
-            let parsed = string.parse();
-            if !parsed.is_err() {
-                return parsed.unwrap();
-            }
-        }
-        250
-    };
-    let mut inputs = [250; 2];
-    inputs[0] = next_num();
-    if inputs[0] != 250 {
-        inputs[1] = next_num();
-    }
-    inputs
 }
 
 */

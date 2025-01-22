@@ -6,6 +6,7 @@ pub fn draw_board<const N: usize>(board: &[[Stone; N]; N]) {
         draw_empty_line(N);
         draw_stone_line(&board[index]);
     }
+    print!("\n");
 }
 
 fn draw_stone_line<const N: usize>(line: &[Stone; N]) {
