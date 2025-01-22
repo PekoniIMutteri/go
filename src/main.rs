@@ -1,12 +1,10 @@
-//use std::io;
-
-//const SIZE: usize = 5;
-
 mod display;
 mod inputs;
 
+const SIZE: usize = 4;
+
 fn main() {
-    let board = [
+    let mut board = [
         [Stone::Black, Stone::Empty, Stone::Black, Stone::Black],
         [Stone::Empty, Stone::White, Stone::White, Stone::White],
         [Stone::Empty, Stone::Empty, Stone::White, Stone::Empty],
@@ -14,7 +12,12 @@ fn main() {
     ];
     display::draw_board(&board);
     if let Some(coords) = inputs::user_input() {
-        println!("{} {}", coords.x, coords.y);
+        if coords.is_outside(SIZE) {
+            println!("too far");
+        } else {
+            board[coords.y][coords.x] = Stone::Black;
+        }
+        display::draw_board(&board);
     } else {
         println!("error");
     }
@@ -32,6 +35,9 @@ impl Coords {
             y,
         }
     }
+    fn is_outside(&self, size: usize) -> bool {
+        self.x >= size || self.y >= size
+    }
 }
 
 #[derive(Clone, Copy)]
@@ -40,30 +46,3 @@ enum Stone {
     Black,
     Empty,
 }
-
-
-
-/* 
-
-fn play<const N: usize>(board: &mut [[Stone; N]; N]) {
-    let mut stone = Stone::Black;
-    loop {
-        draw_board(board);
-        print!("\n");
-        println!("next");
-        let coords = inputs();
-        if coords[0] == 250 || coords[1] == 250 || coords[0] >= N || coords[1] >= N {
-            break;
-        }
-        board[coords[1]][coords[0]] = stone;
-        match stone {
-            Stone::Black => stone = Stone::White,
-            Stone::White => stone = Stone::Black,
-            _ => (),
-        }
-    }
-    draw_board(board);
-    println!("\nquit");
-}
-
-*/

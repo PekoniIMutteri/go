@@ -1,10 +1,10 @@
 use super::Stone;
 
 pub fn draw_board<const N: usize>(board: &[[Stone; N]; N]) {
-    draw_stone_line(&board[0]);
+    draw_stone_line(&board[N - 1]);
     for index in 1..N {
         draw_empty_line(N);
-        draw_stone_line(&board[index]);
+        draw_stone_line(&board[N - 1 - index]);
     }
     print!("\n");
 }
@@ -32,40 +32,3 @@ fn draw_empty_line(lenght: usize) {
     }
     print!("\n");
 }
-
-
-/*
-pub fn draw_board<const N: usize>(board: &[[Stone; N]; N]) {
-    let mut start = true;
-    for line in board {
-        if !start {
-            print!("|");
-            for _ in 1..N {
-                print!("   |");
-            }
-            print!("\n");
-        } else {
-            start = false
-        }
-        draw_line(line);
-    }
-}
-
-fn draw_line<const N: usize>(line: &[Stone; N]) {
-    let mut start = true;
-    for stone in line {
-        if !start {
-            print!("---");
-        } else {
-            start = false;
-        }
-        match stone {
-            Stone::White => print!("C"),
-            Stone::Black => print!("0"),
-            Stone::Empty => print!(" "),
-        }
-    }
-    print!("\n");
-}
-*/
-

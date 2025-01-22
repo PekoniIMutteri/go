@@ -18,12 +18,13 @@ pub fn user_input() -> Option<Coords> {
         }
         None
     };
-    let mut input: Coords = Coords::new(0, 0);
-    if let Some(num) = next_num() {
-        input.x = num;
-        if let Some(num) = next_num() {
-            input.y = num;
-            return Some(input);
+    if let Some(num_x) = next_num() {
+        if num_x > 0 {
+            if let Some(num_y) = next_num() {
+                if num_y > 0 {
+                    return Some(Coords::new(num_x - 1, num_y - 1));
+                }
+            }
         }
     }
     None
