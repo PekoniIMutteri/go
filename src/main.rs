@@ -1,6 +1,27 @@
-use std::io;
+//use std::io;
 
-const SIZE: usize = 5;
+//const SIZE: usize = 5;
+
+mod display;
+
+fn main() {
+    let board = [
+        [Stone::Black, Stone::Empty],
+        [Stone::Empty, Stone::White],
+    ];
+    display::draw_board(&board);
+}
+
+#[derive(Clone, Copy)]
+enum Stone {
+    White,
+    Black,
+    Empty,
+}
+
+
+
+/* 
 
 fn main() {
     let mut board = [[Stone::Empty; SIZE]; SIZE];
@@ -50,42 +71,4 @@ fn inputs() -> [usize; 2] {
     inputs
 }
 
-fn draw_board<const N: usize>(board: &[[Stone; N]; N]) {
-    let mut start = true;
-    for line in board {
-        if !start {
-            print!("|");
-            for _ in 1..N {
-                print!("   |");
-            }
-            print!("\n");
-        } else {
-            start = false
-        }
-        draw_line(line);
-    }
-}
-
-fn draw_line<const N: usize>(line: &[Stone; N]) {
-    let mut start = true;
-    for stone in line {
-        if !start {
-            print!("---");
-        } else {
-            start = false;
-        }
-        match stone {
-            Stone::White => print!("C"),
-            Stone::Black => print!("0"),
-            Stone::Empty => print!(" "),
-        }
-    }
-    print!("\n");
-}
-
-#[derive(Clone, Copy)]
-enum Stone {
-    White,
-    Black,
-    Empty,
-}
+*/
